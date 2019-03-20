@@ -11,10 +11,20 @@
     <div>Comments: 
         <ul>
             {{#each this.comments}}
-            <li>{{this}}</li>
+            <li>{{this.comment}} commented at: {{this.date}}</li>
             {{/each}}
         </ul>
     </div>
-    <button class="noteNews" data-id="{{this._id}}"></button>
+    <button class="noteNews" data-id="{{this._id}}">Take Notes</button>
     <hr>
 {{/each}}
+
+
+<div id="notearea" style="display:none">
+    <label for="note">Note</label>
+    <textarea id="note"></textarea>
+    <div class="buttons">
+        <button id="savenote" data-id="">Submit</button>
+        <button id="clearnotes">Delete All Notes</button>
+    </div>
+</div>

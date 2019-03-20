@@ -11,13 +11,14 @@ router.post("/api/newnote", function(req, res){
         // savedNews_id: id
         // comment: ""
     // }
-    db.Notes.create(req.body,function(err, data){
-        if(err)throw err
-        res.json(data)
+    db.Notes.create(req.body).then(function(notedata){
+        // return  connect with savedNews DB push comments array
+        return db.SavedNews.findByIdAndUpdate(notedata.savedNews_id, {$push:{comments: notedata}})
+    }).then(function(savedNewsdata){
+        res.json(savedNewsdata)
+    }).catch(function(err){
+        res.json(err)
     })
-    // return  connect with savedNews DB push comments array
-    //.catch
-
 })
 
 

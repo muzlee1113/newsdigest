@@ -64,7 +64,22 @@ $(document).ready(function () {
         e.preventDefault()
         // get the _id out from data_id
         var id = $(this).data("id")
+        console.log(id)
+        var comment = $("#note").val()
+        console.log(comment)
+        // format the reqest body
+        var requestBody = {
+            savedNews_id: id,
+            comment: comment
+        }
         // make a POST request to notesDB
+        $.ajax({
+            url: "/api/newnote",
+            method: "POST",
+            data: requestBody
+        }).then(function(result){
+            console.log(result)
+        })
     })
 
 
