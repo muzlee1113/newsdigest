@@ -1,0 +1,20 @@
+<a href="/"><button>Home</button></a>
+
+
+{{#each newsData}}
+    <a href = "{{this.newsobj.link}}"><div>Headline  : {{this.newsobj.headline}}</div></a>
+    <div>Updated At: {{this.newsobj.date}}</div>
+    <div>Summary   : {{this.newsobj.summary}}</div>
+    <div>By {{this.newsobj.reporter}}</div>
+    <img src="{{this.newsobj.photo}}">
+    <div>Saved At: {{this.date}}</div>
+    <div>Comments: 
+        <ul>
+            {{#each this.comments}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+    <button class="noteNews" data-id="{{this._id}}"></button>
+    <hr>
+{{/each}}

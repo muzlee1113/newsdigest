@@ -1,0 +1,28 @@
+{{!-- Do a drop down for all kinds of scraping of NYT --}}
+<button id="scrapeNYTWN">Scrape NYT World News</button>
+<button id="scrapeNYTUS">Scrape NYT US News</button>
+
+<a href="/savednews"><button>Saved News</button></a>
+<hr>
+{{#each newsData}}
+<a href="{{this.link}}">
+    <div>Headline : {{this.headline}}</div>
+</a>
+<div>Updated At: {{this.date}}</div>
+<div>Summary : {{this.summary}}</div>
+<div>By {{this.reporter}}</div>
+<img src="{{this.photo}}">
+<button class="saveNews" data-id="{{this._id}}">SAVE ARTICLE</button>
+<hr>
+{{/each}}
+
+
+
+<div id="notearea" style="display:none">
+    <label for="note">Note</label>
+    <textarea id="note"></textarea>
+    <div class="buttons">
+        <button id="savenote" data-id="">Submit</button>
+        <button id="clearnotes">Delete All Notes</button>
+    </div>
+</div>
