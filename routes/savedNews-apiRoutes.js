@@ -24,7 +24,7 @@ router.post("/api/savenews", function (req, res) {
     // })
 
     // News DB change boolean saved to true
-    db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }).then(function (newsdata) {
+    db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }, {new:true}).then(function (newsdata) {
         console.log(newsdata)
         // insert the savedNews as an object into savedNews DB
         db.SavedNews.create({ newsobj: newsdata }).then(function (savedNewsdata) {

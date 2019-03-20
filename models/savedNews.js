@@ -9,6 +9,10 @@ var SavedNewsSchema = new Schema({
     comments: {
         type: Array,
     },
+    // comments_id: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "notes"
+    // },
     date:  {
         type: Date,
         default: Date.now()
