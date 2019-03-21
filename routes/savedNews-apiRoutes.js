@@ -8,20 +8,8 @@ var db = require("../models/index");
 //Routes
 // POST: save a news article from newsDB to savednewsDB
 router.post("/api/savenews", function (req, res) {
-
-    // db.News.findById(req.body.id, function (err, newsdata) {
-    //     if (err) throw err
-    //     console.log(newsdata)
-    //     db.SavedNews.create({ newsobj: newsdata }).then(function (savedNewsdata) {
-    //         // return connect with News DB change boolean
-    //         return db.News.findByIdAndUpdate(savedNewsdata.newsobj._id, { $set:{saved:true}})
-    //     }).then(function(newsdata){
-
-    //         res.json(newsdata)
-    //     }).catch(function (err) {
-    //         res.json(err)
-    //     })
-    // })
+    //  check the headline 
+    // if match sth don sent the record to the database
 
     // News DB change boolean saved to true
     db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }, { new: true }).then(function (newsdata) {

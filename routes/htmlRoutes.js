@@ -9,6 +9,7 @@ var db = require("../models/index");
 router.get("/", function (req, res) {
     console.log("a GET request for all the scraped news")
     db.News.find({}, function (err, data) {
+        // check the headline, if it matches the one in savednews trun the saved boolean to true
         if (err) {
             res.status(500).send()
             console.log(err)

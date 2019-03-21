@@ -128,5 +128,14 @@ router.get("/api/scrape/nytus", function (req, res) {
 // GET: NYT Business News
 //https://www.nytimes.com/section/business
 
+
+// DELETE: empty the news database
+router.delete("/api/clearnews", function (req, res) {
+    // remove exisiting news
+    db.News.remove({}, function (result) {
+        res.json("Delete All!")
+    })
+})
+
 //export router
 module.exports = router

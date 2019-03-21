@@ -1,6 +1,57 @@
-<a href="/"><button>Home</button></a>
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #386F9C;">
+    <a class="navbar-brand" href="/"><i class="fas fa-newspaper pr-2"></i> News Digest</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link activetab" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link currenttab" href="/savednews">Saved</a>
+            </li>
+        </ul>
+    </div>
+</nav>
 
 
+{{!-- Jumbotron --}}
+<div class="jumbotron jumbotron-fluid" style="background-color: #112E41">
+    <div class="container">
+        <h1 class="display-4"><i class="fas fa-cut pr-2"></i> Saved News Articles</h1>
+        <p class="lead">Take notes on your saved news.</p>
+    </div>
+</div>
+
+
+{{!-- News Cards --}}
+{{#each newsData}}
+<div class="card mb-3 mx-5 bg-dark">
+    <div class="row no-gutters align-items-center">
+        <div class="col-md-2">
+            <img src="{{this.newsobj.photo}}" class="card-img" alt="..." style="width:100%">
+        </div>
+        <div class="col-md-9">
+            <div class="card-body">
+                <a href="{{this.newsobj.link}}">
+                    <h5 class="card-title">{{this.newsobj.headline}} <i class="fas fa-link pl-2"></i> </h5>
+                </a>
+                <p class="card-text">{{this.newsobj.summary}}</p>
+                <p class="card-text"><small class="text-muted">By {{this.newsobj.reporter}} | Updated at
+                        {{this.newsobj.date}} | Saved at {{this.date}}</small></p>
+            </div>
+        </div>
+        <div class="col-md-1">
+            <button class="btn btn-warning btn-lg btn-blocksaveNews noteNews" data-id="{{this._id}}" data-toggle="modal"
+                data-target="#notesModel"><i class="fas fa-pen-fancy pr-1"></i> Notes</button>
+        </div>
+    </div>
+</div>
+{{/each}}
+{{!-- 
 {{#each newsData}}
     <a href = "{{this.newsobj.link}}"><div>Headline  : {{this.newsobj.headline}}</div></a>
     <div>Updated At: {{this.newsobj.date}}</div>
@@ -17,14 +68,49 @@
     </div>
     <button class="noteNews" data-id="{{this._id}}">Take Notes</button>
     <hr>
-{{/each}}
+{{/each}} --}}
 
 
-<div id="notearea" style="display:none">
-    <label for="note">Note</label>
-    <textarea id="note"></textarea>
-    <div class="buttons">
-        <button id="savenote" data-id="">Submit</button>
-        <button id="clearnotes">Delete All Notes</button>
+{{!-- Notes Model --}}
+
+
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" id="notesModel" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalCenterTitle">Take Notes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row px-4 mb-2">
+                    <div>Notes for: </div>
+                    <h5 id="selectedNewsTile" style="color:#112E41">
+                        {{!-- news headline comes here --}}
+                    </h5>
+                </div>
+                <div class="row px-4 notes" id="takennotes">
+                        {{!-- Notes comes here --}}
+                </div>
+                <div class="row px-4">
+                    <div class="card my-3 p-2" id="notearea" style="width:100%">
+                        <textarea id="note" class="mb-2" placeholder="Take new notes here"
+                            style="width:100%; height:100px"></textarea>
+                        <div class="buttons">
+                            <button class="btn btn-warning btn-lg btn-block" id="savenote" data-id="">Add New
+                                Notes</button>
+                            <button class="btn btn-secondary btn-lg btn-block" id="clearnotes" data-id="">Delete All Notes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{!-- <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save</button>
+      </div> --}}
+        </div>
     </div>
 </div>

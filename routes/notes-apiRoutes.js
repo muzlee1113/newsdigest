@@ -6,19 +6,47 @@ var db = require("../models/index");
 
 
 //Routes
+// GET: notes of a specific saved news
+router.get("/api/notes/:id", function(req, res){
+    let id = req.params.id
+    console.log(id)
+    db.Notes.find({savedNews: id}).populate("savedNews").then(function(notesdata){
+        res.json(notesdata)
+        console.log(notesdata)
+    }).catch(function(err){
+        res.json(err)
+    })
+})
+
+// POST: a new note
 router.post("/api/newnote", function(req, res){
-    // req.body  --> {
-        // savedNews_id: id
-        // comment: ""
-    // }
     db.Notes.create(req.body).then(function(notedata){
         // return  connect with savedNews DB push comments array
-        return db.SavedNews.findByIdAndUpdate(notedata.savedNews_id, {$push:{comments: notedata._id}})
+        return db.SavedNews.findByIdAndUpdate(notedata.savedNews, {$push:{comments: notedata._id}})
     }).then(function(savedNewsdata){
         res.json(savedNewsdata)
     }).catch(function(err){
         res.json(err)
     })
+})
+
+// DELETE: a note with id
+router.delete("/api/note/:id", function(req, res){
+    db.Notes.deleteOne({ _id: req.params.id }).then(function(result){
+        res.json(result)
+    }).catch(function(err){
+        res.json(err)
+    })
+})
+
+// DELETE: all notes with id
+router.delete("/api/clearnotes/:id", function(req, res){
+    db.Notes.deleteMany({ savedNews: req.params.id }).then(function(result){
+        res.json(result)
+    }).catch(function(err){
+        res.json(err)
+    })
+
 })
 
 
