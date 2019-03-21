@@ -24,15 +24,19 @@ router.post("/api/savenews", function (req, res) {
     // })
 
     // News DB change boolean saved to true
-    db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }, {new:true}).then(function (newsdata) {
+    db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }, { new: true }).then(function (newsdata) {
         console.log(newsdata)
-        // insert the savedNews as an object into savedNews DB
-        db.SavedNews.create({ newsobj: newsdata }).then(function (savedNewsdata) {
+        // avoid multiple saved action
+        db.SavedNews.init().then(function () {
+            // insert the savedNews as an object into savedNews DB
+            db.SavedNews.create({ news_id: req.body.id, newsobj: newsdata })
+                .then(function (savedNewsdata) {
 
-            res.json(savedNewsdata)
+                    res.json(savedNewsdata)
 
-        }).catch(function (err) {
-            res.json(err)
+                }).catch(function (err) {
+                    res.json(err)
+                })
         })
     })
 })
@@ -43,5 +47,5 @@ router.post("/api/savenews", function (req, res) {
 
 
 
-    //export router
-    module.exports = router
+//export router
+module.exports = router

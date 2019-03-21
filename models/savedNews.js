@@ -6,16 +6,21 @@ var Schema = mongoose.Schema;
 // Using the Schema constructor, create a new LibrarySchema object
 // This is similar to a Sequelize model
 var SavedNewsSchema = new Schema({
-    comments: {
-        type: Array,
-    },
-    // comments_id: {
-    //     type: Schema.Types.ObjectId,
-    //     ref: "notes"
+    // comments: {
+    //     type: Array,
     // },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: "Notes"
+    }],
     date:  {
         type: Date,
-        default: Date.now()
+        default: Date.now
+    },
+    news_id: {
+        type: String,
+        unique: true,
+        required: true
     },
     newsobj: {
         type: Object,

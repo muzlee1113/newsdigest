@@ -12,7 +12,7 @@ var NotesSchema = new Schema({
     },
     date:  {
         type: Date,
-        default: Date.now()
+        default: Date.now
     },
     savedNews_id: String
 });

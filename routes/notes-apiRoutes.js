@@ -13,7 +13,7 @@ router.post("/api/newnote", function(req, res){
     // }
     db.Notes.create(req.body).then(function(notedata){
         // return  connect with savedNews DB push comments array
-        return db.SavedNews.findByIdAndUpdate(notedata.savedNews_id, {$push:{comments: notedata}})
+        return db.SavedNews.findByIdAndUpdate(notedata.savedNews_id, {$push:{comments: notedata._id}})
     }).then(function(savedNewsdata){
         res.json(savedNewsdata)
     }).catch(function(err){

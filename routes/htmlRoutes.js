@@ -29,19 +29,17 @@ router.get("/", function (req, res) {
 // GET: render all the savednews
 router.get("/savednews", function (req, res) {
     console.log("a GET request for all the saved news")
-    db.SavedNews.find({}, function (err, data) {
-        if (err) {
-            res.status(500).send()
-            console.log(err)
-        } else {
+    db.SavedNews.find().populate("comments").then(
+        function (savedNewsdata) {
             var newsDataObj = {
-                newsData: data
+                newsData: savedNewsdata
             }
             //render in news.handlebars
             res.render("savedNews", newsDataObj)
-        }
-    })
-
+            // res.json(savedNewsdata)
+        }).catch(function (err) {
+            res.json(err)
+        })
 })
 
 
