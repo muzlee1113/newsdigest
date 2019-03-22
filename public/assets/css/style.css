@@ -1,6 +1,7 @@
 body{
     background-color: black;
     color: white;
+    font-family: 'Open Sans', sans-serif;
 }
 
 a{
@@ -17,4 +18,8 @@ a{
 
 .currenttab{
     color: rgba(255,255,255,.5)!important
+}
+
+h1, h2, h3, h4, h5{
+    font-family: 'Merriweather', serif;
 }

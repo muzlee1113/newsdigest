@@ -30,7 +30,29 @@ router.post("/api/savenews", function (req, res) {
 })
 
 
+// DELETE: delete a saved news article
+router.delete("/api/deletesavednews/:id",function(req,res){
+    db.News.findByIdAndUpdate(req.body.originalid, { $set: { saved: false } }, { new: true }).then(function (newsdata) {
+        console.log(newsdata)
+        db.SavedNews.deleteOne({_id:req.params.id}).then(function(data){
+            res.json(data)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+})
 
+// DELETE: delete all saved news articles
+router.delete("/api/deletesavednews/",function(req,res){
+    db.News.updateMany({}, { $set: { saved: false } }, { new: true }).then(function (newsdata) {
+        console.log(newsdata)
+        db.SavedNews.remove({}).then(function(data){
+            res.json(data)
+        }).catch(function(err){
+            res.json(err)
+        })
+    })
+})
 
 
 

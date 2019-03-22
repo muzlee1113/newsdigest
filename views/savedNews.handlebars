@@ -13,6 +13,9 @@
             <li class="nav-item">
                 <a class="nav-link currenttab" href="/savednews">Saved</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link currenttab" href="#" id="deletesavednews" style="color:rgb(139,0,0)!important">Delete All Saved News</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -22,7 +25,7 @@
 <div class="jumbotron jumbotron-fluid" style="background-color: #112E41">
     <div class="container">
         <h1 class="display-4"><i class="fas fa-cut pr-2"></i> Saved News Articles</h1>
-        <p class="lead">Take notes on your saved news.</p>
+        <h3 class="lead">Take notes on your saved news.</h3>
     </div>
 </div>
 
@@ -30,7 +33,7 @@
 {{!-- News Cards --}}
 {{#each newsData}}
 <div class="card mb-3 mx-5 bg-dark">
-    <div class="row no-gutters align-items-center">
+    <div class="row no-gutters align-items-center p-2">
         <div class="col-md-2">
             <img src="{{this.newsobj.photo}}" class="card-img" alt="..." style="width:100%">
         </div>
@@ -45,33 +48,13 @@
             </div>
         </div>
         <div class="col-md-1">
-            <button class="btn btn-warning btn-lg btn-blocksaveNews noteNews" data-id="{{this._id}}" data-toggle="modal"
+            <button class="btn btn-warning btn-lg btn-blocksaveNews noteNews m-2" data-id="{{this._id}}" data-originalid="{{this.news_id}}" data-toggle="modal"
                 data-target="#notesModel"><i class="fas fa-pen-fancy pr-1"></i> Notes</button>
+            <button class="btn btn-danger btn-lg btn-blocksaveNews deleteNews m-2" data-id="{{this._id}}" data-originalid="{{this.news_id}}"><i class="fas fa-trash"></i> Delete</button>
         </div>
     </div>
 </div>
 {{/each}}
-{{!-- 
-{{#each newsData}}
-    <a href = "{{this.newsobj.link}}"><div>Headline  : {{this.newsobj.headline}}</div></a>
-    <div>Updated At: {{this.newsobj.date}}</div>
-    <div>Summary   : {{this.newsobj.summary}}</div>
-    <div>By {{this.newsobj.reporter}}</div>
-    <img src="{{this.newsobj.photo}}">
-    <div>Saved At: {{this.date}}</div>
-    <div>Comments: 
-        <ul>
-            {{#each this.comments}}
-            <li>{{this.comment}} commented at: {{this.date}}</li>
-            {{/each}}
-        </ul>
-    </div>
-    <button class="noteNews" data-id="{{this._id}}">Take Notes</button>
-    <hr>
-{{/each}} --}}
-
-
-{{!-- Notes Model --}}
 
 
 <!-- Modal -->

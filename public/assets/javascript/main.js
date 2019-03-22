@@ -3,29 +3,19 @@ $(document).ready(function () {
     // clickhandlers
     // scrape news
     // NYT World News
-    $("#scrapeNYTWN").on("click", function (e) {
-        console.log("scrape NYT WN click!")
+    $(".scrapebtn").on("click", function(e){
+        console.log("scrape click!")
         e.preventDefault()
-        // ajax GET request to do scraping on NYT World News
+        let source = $(this).data("source")
+        console.log("Scraping from "+ source + "...")
+        // ajax GET request to do scraping on News from source
         $.ajax({
-            url: "/api/scrape/nytworld",
+            url: "/api/scrape/" + source,
             method: "GET"
         }).then(function (result) {
             location.reload()
             alert(result)
-        })
-    })
-    // NYT US News
-    $("#scrapeNYTUS").on("click", function (e) {
-        console.log("scrape NYT US click!")
-        e.preventDefault()
-        // ajax GET request to do scraping on NYT US News
-        $.ajax({
-            url: "/api/scrape/nytus",
-            method: "GET"
-        }).then(function (result) {
-            location.reload()
-            alert(result)
+            console.log(result)
         })
     })
 
@@ -68,11 +58,48 @@ $(document).ready(function () {
        
     })
 
+    $(".deleteNews").on("click",function(e){
+
+        console.log("delete a savednews click!")
+        e.preventDefault()
+        // get the _id out from data-id
+        let id = $(this).data("id")
+        let originalid = $(this).data("originalid")
+        let requestBody = {
+            originalid: originalid
+        }
+        // make a DELETE request to delete the specific saved news
+        $.ajax({
+            url: "/api/deletesavednews/"+id,
+            method: "DELETE",
+            data: requestBody
+        }).then(function(result){
+            console.log("deleted a savednews!")
+            // reload the page
+            location.reload()
+        })
+    })
+
+    $("#deletesavednews").on("click",function(e){
+        console.log("delete all saved news click!")
+        e.preventDefault()
+        // make a DELETE request to delete all the saved news
+        $.ajax({
+            url: "/api/deletesavednews/",
+            method: "DELETE",
+        }).then(function(result){
+            console.log("deleted all savednews!")
+            // reload the page
+            location.reload()
+        })
+
+    })
+
     // trigger input areas for taking notes on savednews
     $(".noteNews").on("click", function (e) {
         console.log("note click!")
         e.preventDefault()
-        // get the _id out from data_id
+        // get the _id out from data-id
         let id = $(this).data("id")
         // changed the submit button's data id
         $("#savenote").attr("data-id", id)

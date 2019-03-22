@@ -6,6 +6,7 @@ var Schema = mongoose.Schema;
 // Using the Schema constructor, create a new LibrarySchema object
 // This is similar to a Sequelize model
 var NewsSchema = new Schema({
+    source: String,
     headline: {
         type: String,
         required: "Headline is a must!"
@@ -13,7 +14,9 @@ var NewsSchema = new Schema({
     summary:  String,
     link: {
         type: String,
-        required: "Link is a must!"
+        required: "Link is a must!",
+        unique: [true, "Don't scrape the news twice"]
+
     },
     date: String,
     photo: String,
@@ -21,7 +24,8 @@ var NewsSchema = new Schema({
         type: Boolean,
         default: false
     },
-    reporter: String
+    reporter: String,
+    
 });
 
 // This creates our model from the above schema, using mongoose's model method
