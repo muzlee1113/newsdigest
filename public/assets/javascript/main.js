@@ -153,7 +153,6 @@ $(document).ready(function () {
         // changed the submit button's data id
         $("#savenote").attr("data-id", id)
         $("#clearnotes").attr("data-id", id)
-        console.log("now the savenote btn data-id is " + id)
         // make a get request to get all the notes of this saved notes
         updateModal(id, headline)
     })
@@ -165,9 +164,7 @@ $(document).ready(function () {
         // get the _id out from data_id
         let id = $(this).attr("data-id")
         console.log("the data-id I actually grabbed is " + id)
-        console.log(id)
         var comment = $("#note").val()
-        console.log(comment)
         // format the reqest body
         var requestBody = {
             savedNews: id,

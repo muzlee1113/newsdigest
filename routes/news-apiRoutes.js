@@ -28,8 +28,6 @@ router.get("/api/scrape/:source", function (req, res) {
             var n = summary.search(".By")
             var reporter = summary.slice(n + 4)
             summary = summary.slice(0, n + 1)
-            console.log(reporter)
-            console.log(summary)
 
 
 

@@ -8,9 +8,7 @@ var db = require("../models/index");
 //Routes
 // GET: detailed notes of a specific saved news
 router.get("/api/notes/:id", function(req, res){
-    let id = req.params.id
-    console.log(id)
-    
+    let id = req.params.id    
     db.Notes.find({savedNews: id}).populate("savedNews").then(function(notesdata){
         res.json(notesdata)
     }).catch(function(err){

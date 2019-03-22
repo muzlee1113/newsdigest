@@ -7,7 +7,6 @@ var db = require("../models/index");
 // routes
 // GET: render all the news
 router.get("/", function (req, res) {
-    console.log("a GET request for all the scraped news")
     db.News.find({}, function (err, data) {
         if (err) {
             res.status(500).send()
@@ -28,7 +27,6 @@ router.get("/", function (req, res) {
 
 // GET: render all the savednews
 router.get("/savednews", function (req, res) {
-    console.log("a GET request for all the saved news")
     db.SavedNews.find().populate("comments").then(
         function (savedNewsdata) {
             var newsDataObj = {
