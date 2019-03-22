@@ -6,13 +6,13 @@ var db = require("../models/index");
 
 
 //Routes
-// GET: notes of a specific saved news
+// GET: detailed notes of a specific saved news
 router.get("/api/notes/:id", function(req, res){
     let id = req.params.id
     console.log(id)
+    
     db.Notes.find({savedNews: id}).populate("savedNews").then(function(notesdata){
         res.json(notesdata)
-        console.log(notesdata)
     }).catch(function(err){
         res.json(err)
     })

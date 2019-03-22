@@ -6,10 +6,27 @@ var db = require("../models/index");
 
 
 //Routes
+// GET all saved news if "comments" exists (not empty)
+router.get("/api/allnotes", function(req, res){
+    db.SavedNews.find({comments:{$gt:[]}}).populate("comments").then(function(notesdata){
+        res.json(notesdata)
+        console.log(notesdata)
+    }).catch(function(err){
+        res.json(err)
+    })
+})
+
+// GET a specific saved news
+router.get("/api/savednews/:id",function(res,req){
+    db.SavedNews.findById(req.params.id).then(function(savedNewsdata){
+        res.json(savedNewsdata)
+    }).catch(function (err) {
+        res.json(err)
+    })
+})
+
 // POST: save a news article from newsDB to savednewsDB
 router.post("/api/savenews", function (req, res) {
-    //  check the headline 
-    // if match sth don sent the record to the database
 
     // News DB change boolean saved to true
     db.News.findByIdAndUpdate(req.body.id, { $set: { saved: true } }, { new: true }).then(function (newsdata) {

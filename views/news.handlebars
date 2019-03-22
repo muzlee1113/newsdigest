@@ -2,7 +2,8 @@
 {{!-- Navs --}}
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #386F9C;">
   <a class="navbar-brand" href="/"><i class="fas fa-newspaper pr-2"></i> News Digest</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
 
@@ -14,22 +15,7 @@
       <li class="nav-item">
         <a class="nav-link activetab" href="/savednews" id="saved">Saved</a>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle activetab" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Scrape
-        </a>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-          <a class="dropdown-item scrapebtn" href="/" data-source="world">World News</a>
-          <a class="dropdown-item scrapebtn" href="/" data-source="us">US News</a>
-          <a class="dropdown-item scrapebtn" href="/" data-source="technology">Tech News</a>
-          <a class="dropdown-item scrapebtn" href="/" data-source="sports">Sport News</a>
-          <a class="dropdown-item scrapebtn" href="/" data-source="business">Business News</a>
-          <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="/" style="color:red!important" id="clearnews">Clear Articles</a>
-        </div>
-      </li>
     </ul>
-
   </div>
 </nav>
 
@@ -38,49 +24,67 @@
   <div class="container">
     <h1 class="display-4"> <i class="fas fa-book-reader pr-2"></i> News Scraper</h1>
     <h3 class="lead">Show you what's happening around the world.</h3>
+    <div>
+      <button class="btn btn-info btn-lg mr-3 my-3" type="button" data-toggle="collapse" data-target="#scrapecollapse"
+        aria-expanded="false" aria-controls="collapseExample">
+        Scrape <i class="fas fa-caret-down pl-2"></i>
+      </button>
+      <button class="btn btn-secondary btn-lg mr-3 my-3" href="/" id="clearnews">Clear All Articles</button>
+    </div>
+    <div class="collapse" id="scrapecollapse">
+      <a class="scrapebtn" href="/" data-source="world">World News</a> |
+      <a class="scrapebtn" href="/" data-source="us">US News</a> |
+      <a class="scrapebtn" href="/" data-source="technology">Tech News</a> |
+      <a class="dscrapebtn" href="/" data-source="sports">Sport News</a> |
+      <a class="scrapebtn" href="/" data-source="business">Business News</a>
+    </div>
   </div>
 </div>
 
 
+
+
 {{!-- News Cards --}}
 {{#each newsData}}
-    {{#if this.saved}}
-    <div class="card mb-3 mx-5" style="background-color: rgb(24, 24, 24);">
-    <div class="row no-gutters align-items-center p-2">
-        <div class="col-md-2">
-        <img src="{{this.photo}}" class="card-img" alt="..." style="width:100%">
-        </div>
-        <div class="col-md-9">
-        <div class="card-body">
-            <a href="{{this.link}}"><h5 class="card-title">{{this.headline}} <i class="fas fa-link pl-2"></i> </h5></a>
-            <p class="card-text">{{this.summary}}</p>
-            <p class="card-text"><small class="text-muted">By {{this.reporter}} | Updated at {{this.date}}</small></p>
-        </div>
-        </div>
-        <div class="col-md-1">
-            {{!-- <button class="btn btn-info btn-lg saveNews" data-id="{{this._id}}"><i class="fas fa-cut pr-1"></i> Save</button> --}}
-        </div>
+{{#if this.saved}}
+<div class="card mb-3 mx-5" style="background-color: rgb(24, 24, 24);">
+  <div class="row no-gutters align-items-center p-2">
+    <div class="col-md-2">
+      <img src="{{this.photo}}" class="card-img" alt="..." style="width:100%">
     </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <p class="card-text"><small class="text-muted">{{this.source}} NEWS</small></p>
+        <a href="{{this.link}}">
+          <h5 class="card-title">{{this.headline}} <i class="fas fa-link pl-2"></i> </h5>
+        </a>
+        <p class="card-text">{{this.summary}}</p>
+        <p class="card-text"><small class="text-muted">By {{this.reporter}} | Updated at {{this.date}}</small></p>
+      </div>
     </div>
-    {{else}}
-    <div class="card mb-3 mx-5 bg-dark">
-    <div class="row no-gutters align-items-center p-2">
-        <div class="col-md-2">
-        <img src="{{this.photo}}" class="card-img" alt="..." style="width:100%">
-        </div>
-        <div class="col-md-9">
-        <div class="card-body">
-            <a href="{{this.link}}"><h5 class="card-title">{{this.headline}} <i class="fas fa-link pl-2"></i> </h5></a>
-            <p class="card-text">{{this.summary}}</p>
-            <p class="card-text"><small class="text-muted">By {{this.reporter}} | Updated at {{this.date}}</small></p>
-        </div>
-        </div>
-        <div class="col-md-1">
-            <button class="btn btn-info btn-lg saveNews" data-id="{{this._id}}"><i class="fas fa-cut pr-1"></i> Save</button>
-        </div>
+    <div class="col-md-1"></div>
+  </div>
+</div>
+{{else}}
+<div class="card mb-3 mx-5 bg-dark">
+  <div class="row no-gutters align-items-center p-2">
+    <div class="col-md-2">
+      <img src="{{this.photo}}" class="card-img" alt="..." style="width:100%">
     </div>
+    <div class="col-md-9">
+      <div class="card-body">
+        <p class="card-text"><small class="text-muted">{{this.source}} NEWS</small></p>
+        <a href="{{this.link}}">
+          <h5 class="card-title">{{this.headline}} <i class="fas fa-link pl-2"></i> </h5>
+        </a>
+        <p class="card-text">{{this.summary}}</p>
+        <p class="card-text"><small class="text-muted">By {{this.reporter}} | Updated at {{this.date}}</small></p>
+      </div>
     </div>
-    {{/if}}
+    <div class="col-md-1">
+      <button class="btn btn-info btn-lg saveNews" data-id="{{this._id}}"><i class="fas fa-cut pr-1"></i> Save</button>
+    </div>
+  </div>
+</div>
+{{/if}}
 {{/each}}
-
-

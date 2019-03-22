@@ -13,9 +13,6 @@
             <li class="nav-item">
                 <a class="nav-link currenttab" href="/savednews">Saved</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link currenttab" href="#" id="deletesavednews" style="color:rgb(139,0,0)!important">Delete All Saved News</a>
-            </li>
         </ul>
     </div>
 </nav>
@@ -26,6 +23,9 @@
     <div class="container">
         <h1 class="display-4"><i class="fas fa-cut pr-2"></i> Saved News Articles</h1>
         <h3 class="lead">Take notes on your saved news.</h3>
+        <button class="btn btn-info btn-lg mr-3 my-2" id="showallnotes" data-toggle="modal"
+            data-target="#allnotesModal">Show All Notes</butoon>
+            <button class="btn btn-secondary btn-lg my-2" id="deletesavednews">Delete All Saved News</butoon>
     </div>
 </div>
 
@@ -48,16 +48,44 @@
             </div>
         </div>
         <div class="col-md-1">
-            <button class="btn btn-warning btn-lg btn-blocksaveNews noteNews m-2" data-id="{{this._id}}" data-originalid="{{this.news_id}}" data-toggle="modal"
-                data-target="#notesModel"><i class="fas fa-pen-fancy pr-1"></i> Notes</button>
-            <button class="btn btn-danger btn-lg btn-blocksaveNews deleteNews m-2" data-id="{{this._id}}" data-originalid="{{this.news_id}}"><i class="fas fa-trash"></i> Delete</button>
+            <button class="btn btn-warning btn-lg btn-blocksaveNews noteNews m-2" data-id="{{this._id}}" data-headline="{{this.newsobj.headline}}"
+                data-originalid="{{this.news_id}}" data-toggle="modal" data-target="#notesModel"><i
+                    class="fas fa-pen-fancy pr-1"></i> Notes</button>
+            <button class="btn btn-danger btn-lg btn-blocksaveNews deleteNews m-2" data-id="{{this._id}}"
+                data-originalid="{{this.news_id}}"><i class="fas fa-trash"></i> Delete</button>
         </div>
     </div>
 </div>
 {{/each}}
+<!-- Modal for view all notes-->
+<div class="modal fade text-dark" id="allnotesModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle"
+    aria-hidden="true">
+    <div class="modal-dialog .modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">All Notes</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="allNotes">
+                {{!-- <div class="card bg-light mb-3" style="width: 100%;">
+                    <div class="card-header">Notes for </div>
+                    <div class="card-body">
+                        <p class="card-text">1</p>
+                        <p class="card-text">2</p>
+                        <p class="card-text">3</p>
+                    </div>
+                </div> --}}
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<!-- Modal -->
+
+
+<!-- Modal for add notes and view notes of a specific saved news-->
 <div class="modal fade bd-example-modal-lg" id="notesModel" tabindex="-1" role="dialog"
     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
@@ -76,7 +104,7 @@
                     </h5>
                 </div>
                 <div class="row px-4 notes" id="takennotes">
-                        {{!-- Notes comes here --}}
+                    {{!-- Notes comes here --}}
                 </div>
                 <div class="row px-4">
                     <div class="card my-3 p-2" id="notearea" style="width:100%">
@@ -85,15 +113,12 @@
                         <div class="buttons">
                             <button class="btn btn-warning btn-lg btn-block" id="savenote" data-id="">Add New
                                 Notes</button>
-                            <button class="btn btn-secondary btn-lg btn-block" id="clearnotes" data-id="">Delete All Notes</button>
+                            <button class="btn btn-secondary btn-lg btn-block" id="clearnotes" data-id="">Delete All
+                                Notes</button>
                         </div>
                     </div>
                 </div>
             </div>
-            {{!-- <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save</button>
-      </div> --}}
         </div>
     </div>
 </div>

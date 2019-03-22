@@ -19,7 +19,7 @@ router.get("/api/scrape/:source", function (req, res) {
         var newsArr = [];
         // scraping headline, link, summary, picture, date
         $("#stream-panel").find("li").each(function (i, element) {
-
+            source = source.toUpperCase()
             var headline = $(element).find("h2").text()
             var link = $(element).find("a").attr("href")
             var photo = $(element).find("img").attr("src")
@@ -35,7 +35,7 @@ router.get("/api/scrape/:source", function (req, res) {
 
             // Save these results in an object that we'll push into the results array we defined earlier
             var news = {
-                source: "New York Times World",
+                source: "NEW YORK TIMES " + source,
                 headline: headline,
                 link: "https://www.nytimes.com" + link,
                 photo: photo,
@@ -64,19 +64,6 @@ router.get("/api/scrape/:source", function (req, res) {
     })
 
 });
-
-
-// GET: NYT Tech News
-//https://www.nytimes.com/section/technology
-
-
-// GET: NYT Sport News
-// https://www.nytimes.com/section/sports
-
-
-// GET: NYT Business News
-//https://www.nytimes.com/section/business
-
 
 // DELETE: empty the news database
 router.delete("/api/clearnews", function (req, res) {
