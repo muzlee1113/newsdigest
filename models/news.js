@@ -15,6 +15,7 @@ var NewsSchema = new Schema({
     link: {
         type: String,
         required: "Link is a must!",
+        // link is the best field for unique checking
         unique: [true, "Don't scrape the news twice"]
 
     },
