@@ -2,7 +2,7 @@
 
 ## Getting Started
 
-This is a web application that collects latest news from New York Times and allows users to save a specific notes article and take notes on saved news. [Deploy Page]([https://eatdaburgerbyyuwen.herokuapp.com](https://digestnewsbyyuwen.herokuapp.com/)). Take a look! Here are some demos:
+This is a web application that collects latest news from New York Times and allows users to save a specific notes article and take notes on saved news. [Here is the Deploy Page](https://digestnewsbyyuwen.herokuapp.com/). Take a look! Here are some demos:
 
 ![Demo1](/demos/demo1.gif)
 
