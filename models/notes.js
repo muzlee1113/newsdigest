@@ -1,4 +1,5 @@
 var mongoose = require("mongoose");
+var moment = require('moment');
 
 // Save a reference to the Schema constructor
 var Schema = mongoose.Schema;
@@ -12,7 +13,7 @@ var NotesSchema = new Schema({
     },
     date:  {
         type: Date,
-        default: Date.now
+        default: Date
     },
     savedNews: {
         type: Schema.Types.ObjectId,

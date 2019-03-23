@@ -30,7 +30,7 @@
 </div>
 
 
-{{!-- News Cards --}}
+{{!-- Notes Cards --}}
 {{#each newsData}}
 <div class="card mb-3 mx-5 bg-dark">
     <div class="row no-gutters align-items-center p-2">
@@ -44,7 +44,7 @@
                 </a>
                 <p class="card-text">{{this.newsobj.summary}}</p>
                 <p class="card-text"><small class="text-muted">By {{this.newsobj.reporter}} | Updated at
-                        {{this.newsobj.date}} | Saved at {{this.date}}</small></p>
+                        {{this.newsobj.date}} | Saved at {{dateFormat this.date "YYYY/MM/DD HH:mm:ss"}}</small></p>
             </div>
         </div>
         <div class="col-md-1">
@@ -69,14 +69,6 @@
                 </button>
             </div>
             <div class="modal-body" id="allNotes">
-                {{!-- <div class="card bg-light mb-3" style="width: 100%;">
-                    <div class="card-header">Notes for </div>
-                    <div class="card-body">
-                        <p class="card-text">1</p>
-                        <p class="card-text">2</p>
-                        <p class="card-text">3</p>
-                    </div>
-                </div> --}}
             </div>
         </div>
     </div>

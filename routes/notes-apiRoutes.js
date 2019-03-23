@@ -28,6 +28,20 @@ router.post("/api/newnote", function(req, res){
     })
 })
 
+
+// PUT: edit the comment
+router.put("/api/note/:id",function(req,res){
+    console.log("==================Trigger update=======================")
+    db.Notes.update({_id:req.params.id}, {$set:{ 
+        comment: req.body.comment, 
+        date: Date.now() 
+    }}).then(function(result){
+        res.json(result)
+    }).catch(function(err){
+        res.json(err)
+    })
+})
+
 // DELETE: a note with id
 router.delete("/api/note/:id", function(req, res){
     db.Notes.deleteOne({ _id: req.params.id }).then(function(result){

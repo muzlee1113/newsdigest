@@ -15,7 +15,7 @@ var SavedNewsSchema = new Schema({
     }],
     date:  {
         type: Date,
-        default: Date.now
+        default: Date
     },
     news_id: {
         type: String,
