@@ -155,8 +155,8 @@ $(document).ready(function () {
 
     // click to edit notes
     $(document).on("click", ".note-item", editNotes);
-    $(document).on("keyup", ".note-item", finishEdit);
-    $(document).on("blur", ".note-item", cancelEdit);
+    $(document).on("keyup", ".note-item", finishEditByEnter);
+    $(document).on("blur", ".note-item", finishEditByBlur);
 
 
 
@@ -302,14 +302,13 @@ $(document).ready(function () {
         $(this).children("input.edit").show()
         $(this).children("input.edit").focus()
     }
-    // finishEdit
-    function finishEdit(e) {
+    // finish Edit
+    function finishEditByEnter(e) {
         let updatedNote = $(this).attr("data-note")
         let noteid = $(this).attr("data-id")
         let savedNewsid = $(this).attr("data-newsid")
         console.log("news id " + savedNewsid)
         console.log("note id " + noteid)
-
 
         //keep check of enter key
         if (e.which === 13) {
@@ -318,17 +317,22 @@ $(document).ready(function () {
             updateNote(updatedNote, noteid, savedNewsid)
         }
     }
-    // cancelEdit
-    function cancelEdit() {
-        let currentNote = $(this).attr("data-note");
+    function finishEditByBlur() {
+        // let currentNote = $(this).attr("data-note");
 
-        if (currentNote) {
-            // make sure what to show and what to hide
-            $(this).children().hide();
-            $(this).children("input.edit").val(currentNote);
-            $(this).children("span").show()
-            $(this).children("div").show()
-        }
+        // if (currentNote) {
+        //     // make sure what to show and what to hide
+        //     $(this).children().hide();
+        //     $(this).children("input.edit").val(currentNote);
+        //     $(this).children("span").show()
+        //     $(this).children("div").show()
+        // }
+        let updatedNote = $(this).children("input").val().trim()
+        let noteid = $(this).attr("data-id")
+        let savedNewsid = $(this).attr("data-newsid")
+        console.log("news id " + savedNewsid)
+        console.log("note id " + noteid)
+        updateNote(updatedNote, noteid, savedNewsid)
     }
 
     // updateNote
