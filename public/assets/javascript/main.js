@@ -155,8 +155,8 @@ $(document).ready(function () {
 
     // click to edit notes
     $(document).on("click", ".note-item", editNotes);
-    $(document).on("keyup", ".note-item", finishEditByEnter);
-    $(document).on("blur", ".note-item", finishEditByBlur);
+    $(document).on("keyup", ".note-item", EnterHit);
+    $(document).on("change", ".note-item", finishEdit);
 
 
 
@@ -303,30 +303,13 @@ $(document).ready(function () {
         $(this).children("input.edit").focus()
     }
     // finish Edit
-    function finishEditByEnter(e) {
-        let updatedNote = $(this).attr("data-note")
-        let noteid = $(this).attr("data-id")
-        let savedNewsid = $(this).attr("data-newsid")
-        console.log("news id " + savedNewsid)
-        console.log("note id " + noteid)
-
-        //keep check of enter key
+    function EnterHit(e) {
         if (e.which === 13) {
-            updatedNote = $(this).children("input").val().trim()
             $(this).blur();
-            updateNote(updatedNote, noteid, savedNewsid)
         }
     }
-    function finishEditByBlur() {
-        // let currentNote = $(this).attr("data-note");
 
-        // if (currentNote) {
-        //     // make sure what to show and what to hide
-        //     $(this).children().hide();
-        //     $(this).children("input.edit").val(currentNote);
-        //     $(this).children("span").show()
-        //     $(this).children("div").show()
-        // }
+    function finishEdit() {
         let updatedNote = $(this).children("input").val().trim()
         let noteid = $(this).attr("data-id")
         let savedNewsid = $(this).attr("data-newsid")
