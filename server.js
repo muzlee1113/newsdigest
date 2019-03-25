@@ -32,21 +32,6 @@ app.use(express.static("public"));
 
 // =================================================================================
 // Handlebars
-
-// format time
-// var hbs = exphbs.create({
-//     extname: '.hbs',
-//     defaultLayout: 'default',
-//     // layoutsDir: './lib/templates/layouts',
-//     // partialsDir: './lib/templates/partials'
-//     helpers: {
-//         dateFormat: require('handlebars-dateformat')
-//     }
-    
-// });
-
-// hbs.registerHelper('dateFormat', require('handlebars-dateformat'));
-
 //For express and handlebars to talk to each others
 // Set Handlebars as the default templating engine.
 app.engine("handlebars", exphbs({ 
